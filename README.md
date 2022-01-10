@@ -1,4 +1,4 @@
-# pytorch-common
+# [pytorch-common](https://pypi.org/project/pytorch-common/)
 
 A module with pytorch common tools like:
 
