@@ -1,6 +1,6 @@
-# [pytorch-common](https://pypi.org/project/pytorch-common/)
+# pytorch-common
 
-A module with pytorch common tools like:
+A [Pypi module](https://pypi.org/project/pytorch-common/) with pytorch common tools like:
 
 * Callbacks (keras style)
   * Validation: Model validation.
@@ -17,3 +17,5 @@ A module with pytorch common tools like:
   * device management
   * stopwatch
   * data split.
+
+
