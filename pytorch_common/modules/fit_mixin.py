@@ -2,6 +2,7 @@ from bunch import Bunch
 
 from pytorch_common.callbacks import Callback
 from pytorch_common.callbacks.output import Logger
+from pytorch_common.modules import Fn
 from pytorch_common.modules.common_mixin import CommonMixin
 from pytorch_common.util import Stopwatch
 

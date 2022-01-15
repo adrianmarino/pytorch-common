@@ -1,7 +1,8 @@
 from pytorch_common.callbacks import Callback
+from pytorch_common.callbacks.metric_improve_mixin import MetricImproveMixin
 
 
-class EarlyStop(Callback):
+class EarlyStop(MetricImproveMixin, Callback):
     """
     Stop training when model has stopped improving a specified metric.
     """
@@ -12,36 +13,13 @@ class EarlyStop(Callback):
         :param mode (str): One of `min`, `max`. In `min` mode check that metric go down after each epoch.
         :param patience (int): Number of epochs with no metric improvement.
         """
-        self.__metric = metric
-        self.__mode = mode
+        self._init('early_stop', metric, mode)
         self.__patience = patience
 
-    def on_init(self, ctx):
-        ctx['patience'] = 0
+    def on_init(self, ctx): ctx['patience'] = 0
 
-    def last_metric_name(self):
-        return 'last_{}'.format(self.__metric)
+    def _on_improve(self, ctx, mode): self.on_init(ctx)
 
-    def update_last_metric(self, ctx):
-        ctx[self.last_metric_name()] = ctx[self.__metric]
-
-    def get_last_metric(self, ctx):
-        return ctx[self.last_metric_name()]
-
-    def has_metric(self, ctx):
-        return self.__metric in ctx
-
-    def has_last_metric(self, ctx):
-        return self.last_metric_name() in ctx
-
-    def on_after_train(self, ctx):
-        if self.has_metric(ctx):
-            if self.has_last_metric(ctx):
-                if self.__mode == 'min':
-                    ctx['patience'] = 0 if ctx[self.__metric] < self.get_last_metric(ctx) else ctx.patience + 1
-                else:
-                    ctx['patience'] = 0 if ctx[self.__metric] > self.get_last_metric(ctx) else ctx.patience + 1
-
-                ctx['early_stop'] = (ctx['patience'] == self.__patience)
-
-            self.update_last_metric(ctx)
+    def _on_not_improve(self, ctx):
+        ctx['patience'] += 1
+        ctx['early_stop'] = (ctx['patience'] == self.__patience)
