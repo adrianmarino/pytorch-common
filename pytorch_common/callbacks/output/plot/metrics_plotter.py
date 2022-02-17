@@ -5,7 +5,7 @@ from pytorch_common.callbacks.output.plot.metric_logger import MetricLogger
 from pytorch_common.callbacks.output.plot.plot import plot_metrics
 
 
-class JupyterMetricsPlotter(OutputCallback):
+class MetricsPlotter(OutputCallback):
     def __init__(
             self,
             warmup_count=0,

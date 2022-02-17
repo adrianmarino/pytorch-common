@@ -17,11 +17,13 @@ A [Pypi module](https://pypi.org/project/pytorch-common/) with pytorch common to
   * **Logger**:
     * Logs context properties. 
     * In general is used to log performance metrics every n epochs.
-  * **JupyterMetricsPlotter**:
+  * **MetricsPlotter**:
     * Plot evaluation metrics. 
     * This graph is updated every n epochs during training process.
   * **Callback** and **OutputCallback**: 
     * Base classes.
+  * **CallbackManager**:
+    * Simplify callbacks support to fit custom models.
 * **StratifiedKFoldCV**: 
   * Support parallel fold processing on CPU.
 * **Mixins**
@@ -32,3 +34,4 @@ A [Pypi module](https://pypi.org/project/pytorch-common/) with pytorch common to
   * stopwatch
   * data split
   * os
+  * model

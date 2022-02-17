@@ -1,10 +1,7 @@
-from bunch import Bunch
-
-from pytorch_common.callbacks import Callback
+from pytorch_common.callbacks import CallbackManager
 from pytorch_common.callbacks.output import Logger
 from pytorch_common.modules import Fn
 from pytorch_common.modules.common_mixin import CommonMixin
-from pytorch_common.util import Stopwatch
 
 
 class FitMixin(CommonMixin):
@@ -27,33 +24,22 @@ class FitMixin(CommonMixin):
         :param callbacks: callback collection. See Callback.
         :param verbose: show/hide logs.
         """
-        ctx = Bunch({
-            'verbose': verbose,
-            'epochs': epochs,
-            'optimizer': optimizer,
-            'loss_fn': loss_fn,
-            'device': self.device,
-            'model': self,
-            'stopwatch': Stopwatch()
-        })
-        for (k, v) in extra_ctx.items():
-            ctx[k] = v
+        callback_manager = CallbackManager(epochs, optimizer, loss_fn, self, callbacks, verbose, extra_ctx)
 
-        Callback.invoke_on_init(ctx, callbacks)
         for epoch in range(epochs):
-            ctx.stopwatch.reset()
-            ctx['epoch'] = epoch + 1
-            ctx['train_loss'] = Fn.train(
+            callback_manager.on_epoch_start(epoch)
+
+            train_loss = Fn.train(
                 self,
                 data_loader,
                 loss_fn,
                 optimizer,
-                ctx.device
+                callback_manager.ctx.device
             )
-            ctx['time'] = ctx.stopwatch.to_str()
-            Callback.invoke_on_after_train(ctx, callbacks)
 
-            if 'early_stop' in ctx and ctx.early_stop is True:
+            callback_manager.on_epoch_end(train_loss)
+
+            if callback_manager.break_training():
                 break
 
-        return ctx
+        return callback_manager.ctx
