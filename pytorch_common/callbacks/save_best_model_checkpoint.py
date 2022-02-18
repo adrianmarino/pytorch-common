@@ -4,7 +4,7 @@ from datetime import datetime
 import torch
 
 from pytorch_common.callbacks import Callback
-from pytorch_common.callbacks.metric_improve_mixin import MetricImproveMixin
+from pytorch_common.callbacks.mixin.metric_improve_mixin import MetricImproveMixin
 from pytorch_common.util import create_path
 
 

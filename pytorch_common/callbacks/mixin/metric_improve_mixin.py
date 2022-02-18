@@ -6,7 +6,7 @@ class MetricImproveMixin:
         """
         self.__last_metric_prefix = last_metric_prefix
         self._metric_name = metric
-        self._previous_metric_name = 'previous_{}'.format(self._metric_name)
+        self._previous_metric_name = '{}_previous_{}'.format(self.__last_metric_prefix, self._metric_name)
         self._mode = mode
 
     def __update_last_metric(self, ctx):

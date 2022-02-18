@@ -15,5 +15,7 @@ class Logger(OutputCallback):
         super().__init__(each_n_epochs)
         self.metrics = metrics
 
+    def can_plot(self, ctx): return True
+
     def on_show(self, ctx):
         logging.info({m: ctx[m] for m in self.metrics if m in ctx and ctx[m] is not None})
