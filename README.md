@@ -35,3 +35,5 @@ A [Pypi module](https://pypi.org/project/pytorch-common/) with pytorch common to
   * data split
   * os
   * model
+  * LoggerBuilder
+
