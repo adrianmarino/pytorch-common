@@ -18,7 +18,7 @@ class Fn:
             optimizer.step()
             total_loss += loss.item()
 
-        return total_loss
+        return total_loss / len(data_loader)
 
     @staticmethod
     def validation(model, data_loader, device):
