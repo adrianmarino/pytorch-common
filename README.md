@@ -257,3 +257,10 @@ callbacks = [
 
 train_method(model, epochs=100, optimizer, loss_fn, callbacks)
 ```
+
+Go to next projects to see funcional code examples
+
+- https://github.com/adrianmarino/deep-fm
+- https://github.com/adrianmarino/attention
+
+
