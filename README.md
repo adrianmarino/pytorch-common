@@ -87,7 +87,7 @@ import pytorch_common.util as pu
 
 sw = pu.Stopwatch()
 
-Call any demanding process...
+# Call any demanding process...
 
 # Get resposne time.
 resposne_time = sw.elapsed_time()
