@@ -156,3 +156,26 @@ result = cv.train(train_subset, params)
 logging.info('CV results: {}'.format(result))
 ```
 
+
+### Assertions
+
+
+```python
+from pytorch_common.error import Assertions
+
+# Check functions and construtor params usign assertions..
+
+param_a = -1
+
+# Raise an exception with 404103 eror code when the condition is not met 
+Assertions.positive_int(404103, variable, 'param name')
+
+Assertions.positive_float(404103, variable, 'param name')
+
+# Other options
+Assertions.is_class(404205, param_value, 'param name', aClass)
+ 
+Assertions.is_tensor(404401, param_value, 'param name')
+
+Assertions.has_shape(404401, param_value, (3, 4), 'param name')
+```
