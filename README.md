@@ -48,10 +48,13 @@ A [Pypi module](https://pypi.org/project/pytorch-common/) with pytorch common to
 import pytorch_common.util as pu
 
 # Setup prefered device.
-pu.set_device_name('gpu')
+pu.set_device_name('gpu') # / 'cpu'
 
 # Setup GPU memory fraction for a process (%).
-pu.set_device_memory(device_name, process_memory_fraction=0.5):
+pu.set_device_memory(
+  'gpu' # / 'cpu',
+  process_memory_fraction=0.5
+)
 
 # Get prefered device. 
 # Note: In case the preferred device is not found, it returns CPU as fallback.
