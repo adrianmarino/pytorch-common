@@ -165,12 +165,12 @@ from pytorch_common.error import Assertions, Checker
 
 # Check functions and construtor params usign assertions..
 
-param_a = -1
+param_value = -1
 
 # Raise an exception with 404103 eror code when the condition is not met 
-Assertions.positive_int(404103, variable, 'param name')
+Assertions.positive_int(404103, param_value, 'param name')
 
-Assertions.positive_float(404103, variable, 'param name')
+Assertions.positive_float(404103, param_value, 'param name')
 
 # Other options
 Assertions.is_class(404205, param_value, 'param name', aClass)
