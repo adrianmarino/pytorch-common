@@ -161,7 +161,7 @@ logging.info('CV results: {}'.format(result))
 
 
 ```python
-from pytorch_common.error import Assertions
+from pytorch_common.error import Assertions, Checker
 
 # Check functions and construtor params usign assertions..
 
@@ -178,4 +178,21 @@ Assertions.is_class(404205, param_value, 'param name', aClass)
 Assertions.is_tensor(404401, param_value, 'param name')
 
 Assertions.has_shape(404401, param_value, (3, 4), 'param name')
+
+# Assertions was impelemented using a Checker builder:
+
+ Checker(error_code, value, name) \
+    .is_not_none() \
+    .is_int() \
+    .is_positive() \
+    .check()
+   
+# Other checker options..
+#   .is_not_none()
+#   .is_int()
+#   .is_float()
+#   .is_positive()
+#   .is_a(aclass)
+#   .is_tensor()
+#   .has_shape(shape)
 ```
