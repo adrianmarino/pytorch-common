@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pytorch-common"
-version = "0.0.16"
+version = "0.0.17"
 description = "Common torch tools and extension"
 authors = ["adrianmarino <adrianmarino@gmail.com>"]
 keywords = ["pytorch", "common"]
@@ -13,7 +13,7 @@ repository = "https://github.com/adrianmarino/pytorch-common/tree/master"
 python = ">=3.7"
 seaborn = ">=0.11.2"
 matplotlib = ">=3.5.1"
-numpy = "<=1.21"
+numpy = ">=1.20"
 bunch = ">=1.0.1"
 torch = ">=1.10.1"
 scikit-learn = ">=1.0.2"
