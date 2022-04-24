@@ -151,7 +151,7 @@ params = {
 }
 
 # Train model...
-result = cv.train(train_subset, params)
+result = cv.train(dataset, params)
 
 logging.info('CV results: {}'.format(result))
 ```
