@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pytorch-common"
-version = "0.0.17"
+version = "0.0.18"
 description = "Common torch tools and extension"
 authors = ["adrianmarino <adrianmarino@gmail.com>"]
 keywords = ["pytorch", "common"]
