@@ -196,3 +196,64 @@ Assertions.has_shape(404401, param_value, (3, 4), 'param name')
 #   .is_tensor()
 #   .has_shape(shape)
 ```
+
+
+### Callbacks
+
+```python
+from pytorch_common.callbacks import CallbackManager
+
+from pytorch_common.callbacks import EarlyStop, \
+                                     ReduceLROnPlateau, \
+                                     Validation
+
+from pytorch_common.callbacks.output import Logger, \
+                                            MetricsPlotter
+
+
+def train_method(model, epochs, optimizer, loss_fn, callbacks):
+ 
+ callback_manager = CallbackManager(epochs, optimizer, loss_fn, model, callbacks)
+
+ for epoch in range(epochs):
+            callback_manager.on_epoch_start(epoch)
+
+            # train model...
+
+            callback_manager.on_epoch_end(train_loss)
+
+            if callback_manager.break_training():
+                break
+
+  return callback_manager.ctx
+        
+
+model     = # Create my model...
+optimizer = # My optimizer...
+loss_fn   = # my lost function
+
+callbacks = [
+   # Log context variables after ech epoch...
+   Logger(['fold', 'time', 'epoch', 'lr', 'train_loss', 'val_loss', ... ]),
+   
+   EarlyStop(metric='val_auc', mode='max', patience=3),
+  
+   ReduceLROnPlateau(metric='val_auc'),
+  
+   Validation(
+       val_set,
+       metrics = {
+           'my_metric_name': lambda y_pred, y_true: # calculate validation metic,
+           ...
+       },
+       each_n_epochs=5
+   ),
+   
+   SaveBestModel(metric='val_loss'),
+   
+   MetricsPlotter(metrics=['train_loss', 'val_loss'])
+]
+
+
+train_method(model, epochs=100, optimizer, loss_fn, callbacks)
+```
