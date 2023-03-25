@@ -4,9 +4,9 @@ import seaborn as sns
 
 def plot_metrics(logs, warmup_count=0):
     epochs = logs['epoch'][warmup_count:]
-    if len(epochs) == 0:
+    if len(epochs) <= 1:
         return
-    
+
     sns.set_style("darkgrid")
 
     metric_names = logs.keys()
