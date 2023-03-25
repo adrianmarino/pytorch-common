@@ -2,35 +2,73 @@
 
 A [Pypi module](https://pypi.org/project/pytorch-common/) with pytorch common tools like:
 
+
+## Build release
+
+**Step 1**: Increase version into next files:
+
+```bash
+pytorch_common/__init__.py
+pyproject.toml
+```
+
+**Step 2**: Build release.
+
+```bash
+$ poetry build                                                                                                                                                                                                                  ✔  
+
+Building pytorch-common (0.0.22)
+  - Building sdist
+  - Built pytorch-common-0.0.22.tar.gz
+  - Building wheel
+  - Built pytorch_common-0.0.22-py3-none-any.whl
+```
+
+**Step 3**: Publish release to PyPI repository.
+
+```bash
+$ poetry build                                                                                                                                                                                                                  ✔  
+
+Username: user_name
+Password: a pass
+
+Publishing pytorch-common (0.0.22) to PyPI
+ - Uploading pytorch-common-0.0.22.tar.gz 100%
+ - Uploading pytorch_common-0.0.22-py3-none-any.whl 100%
+```
+
+
 ## Features
 
 * **Callbacks** (keras style)
   * **Validation**: Model validation.
-  * **ReduceLROnPlateau**:     
-    * Reduce learning rate when a metric has stopped improving. 
+  * **ReduceLROnPlateau**:
+    * Reduce learning rate when a metric has stopped improving.
     * Models often benefit from reducing the learning rate by a factor
       of 2-10 once learning stagnates. This scheduler reads a metrics
       quantity and if no improvement is seen for a 'patience' number
       of epochs, the learning rate is reduced.
   * **EarlyStop**:
     * Stop training when model has stopped improving a specified metric.
-  * **SaveBestModel**: 
+  * **SaveBestModel**:
     * Save model weights to file while model validation metric improve.
   * **Logger**:
-    * Logs context properties. 
+    * Logs context properties.
     * In general is used to log performance metrics every n epochs.
   * **MetricsPlotter**:
-    * Plot evaluation metrics. 
+    * Plot evaluation metrics.
     * This graph is updated every n epochs during training process.
-  * **Callback** and **OutputCallback**: 
+  * **Callback** and **OutputCallback**:
     * Base classes.
   * **CallbackManager**:
     * Simplify callbacks support to fit custom models.
-* **StratifiedKFoldCV**: 
+* **StratifiedKFoldCV**:
   * Support parallel fold processing on CPU.
 * **Mixins**
   * FiMixin
   * CommonMixin
+  * PredictMixin
+  * PersistentMixin
 * **Utils**
   * device management
   * stopwatch
@@ -56,7 +94,7 @@ pu.set_device_memory(
   process_memory_fraction=0.5
 )
 
-# Get prefered device. 
+# Get prefered device.
 # Note: In case the preferred device is not found, it returns CPU as fallback.
 device = pu.get_device()
 ```
@@ -79,8 +117,8 @@ pu.LoggerBuilder() \
  .on_console('%(asctime)s - %(levelname)s - %(message)s') \
  .build()
 ```
- 
- 
+
+
 ### Stopwatch
 
 
@@ -109,13 +147,13 @@ import pytorch_common.util as pu
 dataset = ... # <-- Torch.utils.data.Dataset
 
 train_subset, test_subset = pu.train_val_split(
-  dataset, 
+  dataset,
   train_percent = .7
 )
 
 train_subset, val_subset, test_subset = pu.train_val_test_split(
-  dataset, 
-  train_percent = .7, 
+  dataset,
+  train_percent = .7,
   val_percent   = .15
 )
 ```
@@ -138,8 +176,8 @@ def get_y_values_fn(dataset):
   pass
 
 cv = StratifiedKFoldCV(
-  train_fold_fn, 
-  get_y_values_fn, 
+  train_fold_fn,
+  get_y_values_fn,
   strategy=NonParallelKFoldCVStrategy() # or ParallelKFoldCVStrategy()
   k_fold = 5
 )
@@ -177,7 +215,7 @@ Assertions.positive_float(404103, param_value, 'param name')
 
 # Other options
 Assertions.is_class(404205, param_value, 'param name', aClass)
- 
+
 Assertions.is_tensor(404401, param_value, 'param name')
 
 Assertions.has_shape(404401, param_value, (3, 4), 'param name')
@@ -189,7 +227,7 @@ Assertions.has_shape(404401, param_value, (3, 4), 'param name')
     .is_int() \
     .is_positive() \
     .check()
-   
+
 # Other checker options..
 #   .is_not_none()
 #   .is_int()
@@ -215,7 +253,7 @@ from pytorch_common.callbacks.output import Logger, \
 
 
 def train_method(model, epochs, optimizer, loss_fn, callbacks):
- 
+
  callback_manager = CallbackManager(epochs, optimizer, loss_fn, model, callbacks)
 
  for epoch in range(epochs):
@@ -229,7 +267,7 @@ def train_method(model, epochs, optimizer, loss_fn, callbacks):
                 break
 
   return callback_manager.ctx
-        
+
 
 model     = # Create my model...
 optimizer = # My optimizer...
@@ -238,9 +276,9 @@ loss_fn   = # my lost function
 callbacks = [
    # Log context variables after each epoch...
    Logger(['fold', 'time', 'epoch', 'lr', 'train_loss', 'val_loss', ... ]),
-   
+
    EarlyStop(metric='val_auc', mode='max', patience=3),
-  
+   
    ReduceLROnPlateau(metric='val_auc'),
   
    Validation(

@@ -26,8 +26,8 @@ class Fn:
         model.eval()
         with torch.no_grad():
             for index, (features, target) in enumerate(data_loader):
-                y_pred.extend(model(features.to(device)))
-                y_true.extend(target.to(device))
+                y_pred.extend(model(features.to(device)).cpu().numpy())
+                y_true.extend(target.to(device).cpu().numpy())
 
         return as_tensor(y_pred), as_tensor(y_true)
 
