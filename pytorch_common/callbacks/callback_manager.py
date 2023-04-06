@@ -6,15 +6,10 @@ from pytorch_common.util import Stopwatch
 
 
 class CallbackManager:
-    def __init__(self, epochs, optimizer, loss_fn, model, callbacks=[Logger()], verbose=1, extra_ctx={}):
+    def __init__(self, ctx, callbacks=[Logger()]):
         self.callbacks = callbacks
-        self.epochs = epochs
-        self.optimizer = optimizer
-        self.loss_fn = loss_fn
-        self.model = model
-        self.verbose = verbose
-        self.ctx = ContextFactory.create(self.epochs, self.optimizer, self.loss_fn, self.model, extra_ctx, self.verbose)
-        Callback.invoke_on_init(self.ctx, self.callbacks)
+        self.ctx = ctx
+        Callback.invoke_on_init(ctx, callbacks)
 
     def on_epoch_start(self, epoch):
         self.ctx.stopwatch.reset()
@@ -28,22 +23,3 @@ class CallbackManager:
 
     def break_training(self):
         return 'early_stop' in self.ctx and self.ctx.early_stop is True
-
-
-class ContextFactory:
-    @staticmethod
-    def create(epochs, optimizer, loss_fn, model, extra_ctx={}, verbose=1):
-        ctx = Bunch({
-            'verbose': verbose,
-            'epochs': epochs,
-            'optimizer': optimizer,
-            'loss_fn': loss_fn,
-            'device': model.device,
-            'model': model,
-            'stopwatch': Stopwatch()
-        })
-
-        for (k, v) in extra_ctx.items():
-            ctx[k] = v
-
-        return ctx
