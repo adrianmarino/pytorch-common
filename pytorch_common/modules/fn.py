@@ -1,7 +1,7 @@
 import torch
 from torch          import as_tensor
 from .fit_context   import FitContextFactory
-
+import numpy as np
 
 
 class Fn:
@@ -34,7 +34,7 @@ class Fn:
 
     @staticmethod
     def validation(ctx, data_loader):
-        """Default validation function. It perform a nomal model validation process.
+        """Default validation function. It perform a normal model validation process.
 
         Args:
             ctx: Contain all object required to perform a train process. See FitContextFactory class to see a context detail.
@@ -52,7 +52,7 @@ class Fn:
                 y_pred.extend(prediction.cpu().numpy())
                 y_true.extend(target.cpu().numpy())
 
-        return as_tensor(y_pred).cpu(), as_tensor(y_true).cpu()
+        return as_tensor(np.array(y_pred)).cpu(), as_tensor(np.array(y_true)).cpu()
 
 
     @staticmethod
