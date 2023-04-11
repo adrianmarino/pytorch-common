@@ -8,12 +8,12 @@ class PredictMixin:
         """Evaluate a data_loader to model.
 
         Args:
-            data_loader: a data_loder.
+            data_loader: a data_loader.
 
         Returns:
             a (y_pre, y_true) tuple
         """
-        ctx = FitContextFactory(self)
+        ctx = FitContextFactory.create(self)
         return Fn.validation(ctx, data_loader)
 
 
@@ -21,8 +21,8 @@ class PredictMixin:
         """Evaluate a data_loader to model and apply score_fn to result.
 
         Args:
-            data_loader: a data_loder.
-            score_fn: Custom funcion used to evaluate model performance. i.e: MSE, RMSE, Binary Cross Entropy, etc...
+            data_loader: a data_loader.
+            score_fn: Custom function used to evaluate model performance. i.e: MSE, RMSE, Binary Cross Entropy, etc...
 
         Returns:
             score function result.
