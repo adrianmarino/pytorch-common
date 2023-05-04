@@ -242,7 +242,7 @@ Assertions.has_shape(404401, param_value, (3, 4), 'param name')
 ### Callbacks
 
 ```python
-from pytorch_common.callbacks import CallbackManager
+from pytorch_common.callbacks import CallbackManager, FitContextFactory
 
 from pytorch_common.callbacks import EarlyStop, \
                                      ReduceLROnPlateau, \
@@ -253,8 +253,10 @@ from pytorch_common.callbacks.output import Logger, \
 
 
 def train_method(model, epochs, optimizer, loss_fn, callbacks):
-
- callback_manager = CallbackManager(epochs, optimizer, loss_fn, model, callbacks)
+  callback_manager = CallbackManager(
+    ctx       = FitContextFactory.create(model, loss_fn, epochs, optimizer), 
+    callbacks = callbacks
+  )
 
  for epoch in range(epochs):
             callback_manager.on_epoch_start(epoch)
