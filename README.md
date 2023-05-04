@@ -17,11 +17,11 @@ pyproject.toml
 ```bash
 $ poetry build                                                                                                                                                                                                                  ✔  
 
-Building pytorch-common (0.0.22)
+Building pytorch-common (0.1.2)
   - Building sdist
-  - Built pytorch-common-0.0.22.tar.gz
+  - Built pytorch-common-0.1.2.tar.gz
   - Building wheel
-  - Built pytorch_common-0.0.22-py3-none-any.whl
+  - Built pytorch_common-0.1.2-py3-none-any.whl
 ```
 
 **Step 3**: Publish release to PyPI repository.
@@ -32,9 +32,9 @@ $ poetry build                                                                  
 Username: user_name
 Password: a pass
 
-Publishing pytorch-common (0.0.22) to PyPI
- - Uploading pytorch-common-0.0.22.tar.gz 100%
- - Uploading pytorch_common-0.0.22-py3-none-any.whl 100%
+Publishing pytorch-common (0.1.2) to PyPI
+ - Uploading pytorch-common-0.1.2.tar.gz 100%
+ - Uploading pytorch_common-0.1.2-py3-none-any.whl 100%
 ```
 
 
