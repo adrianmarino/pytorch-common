@@ -242,7 +242,8 @@ Assertions.has_shape(404401, param_value, (3, 4), 'param name')
 ### Callbacks
 
 ```python
-from pytorch_common.callbacks import CallbackManager, FitContextFactory
+from pytorch_common.callbacks import CallbackManager
+from pytorch_common.modules   import FitContextFactory
 
 from pytorch_common.callbacks import EarlyStop, \
                                      ReduceLROnPlateau, \
