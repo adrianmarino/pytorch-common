@@ -1,0 +1,1 @@
+filter_by_keys = lambda d, keys: {i[0]: i[1] for i in d.items() if i[0] in keys}
