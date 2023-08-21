@@ -3,7 +3,7 @@ import seaborn as sns
 
 
 def plot_loss(
-    loss,
+    losses,
     warmup_epochs = 0, 
     xscale        = 'linear', 
     yscale        = 'log',
@@ -14,9 +14,9 @@ def plot_loss(
 ):
     plot = False
 
-    for name in loss.keys():
-        y_values = loss[name][warmup_epochs:] 
-        if len(y_values) < 1:
+    for name in losses.keys():
+        y_values = losses[name][warmup_epochs:] 
+        if len(y_values) < 2:
             continue
         sns.set_style(style)
         plot = True
