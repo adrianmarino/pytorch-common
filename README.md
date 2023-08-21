@@ -58,6 +58,7 @@ Publishing pytorch-common (0.0.22) to PyPI
   * **MetricsPlotter**:
     * Plot evaluation metrics.
     * This graph is updated every n epochs during training process.
+    * Allow save plot into a file.
   * **Callback** and **OutputCallback**:
     * Base classes.
   * **CallbackManager**:
@@ -65,10 +66,10 @@ Publishing pytorch-common (0.0.22) to PyPI
 * **StratifiedKFoldCV**:
   * Support parallel fold processing on CPU.
 * **Mixins**
-  * FiMixin
-  * CommonMixin
-  * PredictMixin
-  * PersistentMixin
+  * `FiMixin`
+  * `CommonMixin`
+  * `PredictMixin`
+  * `PersistentMixin`
 * **Utils**
   * device management
   * stopwatch
@@ -76,6 +77,9 @@ Publishing pytorch-common (0.0.22) to PyPI
   * os
   * model
   * LoggerBuilder
+  * Dict Utils
+* **Plot**
+  *  plot promotives like `plot_loss`.
 
 ## Examples
 
