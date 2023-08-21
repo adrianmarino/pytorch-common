@@ -17,11 +17,11 @@ pyproject.toml
 ```bash
 $ poetry build                                                                                                                                                                                                                  ✔  
 
-Building pytorch-common (0.1.2)
+Building pytorch-common (0.2.3)
   - Building sdist
-  - Built pytorch-common-0.1.2.tar.gz
+  - Built pytorch-common-0.2.3.tar.gz
   - Building wheel
-  - Built pytorch_common-0.1.2-py3-none-any.whl
+  - Built pytorch_common-0.2.3-py3-none-any.whl
 ```
 
 **Step 3**: Publish release to PyPI repository.
@@ -75,6 +75,7 @@ Publishing pytorch-common (0.2.3) to PyPI
   * model
   * LoggerBuilder
   * Dict Utils
+  * `WeightsFileResolver`
 * **Plot**
   *  plot promotives like `plot_loss`.
 
@@ -302,6 +303,36 @@ callbacks = [
 
 train_method(model, epochs=100, optimizer, loss_fn, callbacks)
 ```
+
+
+
+### Utils
+
+#### WeightsFileResolver
+
+```bash
+$ ls ./wegiths
+
+2023-08-21_15-17-49--gfm--epoch_2--val_loss_1.877971887588501.pt
+2023-08-21_15-13-09--gfm--epoch_3--val_loss_1.8183038234710693.pt
+2023-08-19_20-00-19--gfm--epoch_10--val_loss_0.9969356060028076.pt
+2023-08-19_19-59-39--gfm--epoch_4--val_loss_1.4990438222885132.pt
+``````
+
+```python
+import pytorch_common.util as pu
+
+resolver = pu.WeightsFileResolver('./weights')
+
+file_path = resolver(experiment='gfm', metric='val_loss', min_value=True)
+
+print(file_path)
+```
+
+```bash
+'./weights/2023-08-19_20-00-19--gfm--epoch_10--val_loss_0.9969356060028076.pt'
+``````
+
 
 Go to next projects to see funcional code examples:
 

@@ -6,3 +6,4 @@ from .os_utils import create_path
 from .stopwatch import Stopwatch
 from .tensor_utils import tensor_eq
 from .dict_utils import filter_by_keys
+from .weights_file_resolver import WeightsFileResolver
