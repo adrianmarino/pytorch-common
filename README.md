@@ -27,14 +27,11 @@ Building pytorch-common (0.1.2)
 **Step 3**: Publish release to PyPI repository.
 
 ```bash
-$ poetry build                                                                                                                                                                                                                  ✔  
+$ poetry publish                                                                                                                                                                                                                  ✔  
 
-Username: user_name
-Password: a pass
-
-Publishing pytorch-common (0.1.2) to PyPI
- - Uploading pytorch-common-0.1.2.tar.gz 100%
- - Uploading pytorch_common-0.1.2-py3-none-any.whl 100%
+Publishing pytorch-common (0.2.3) to PyPI
+ - Uploading pytorch-common-0.2.3.tar.gz 100%
+ - Uploading pytorch_common-0.2.3-py3-none-any.whl 100%
 ```
 
 
