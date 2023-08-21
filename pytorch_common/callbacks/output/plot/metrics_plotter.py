@@ -42,7 +42,7 @@ class MetricsPlotter(OutputCallback):
                 losses        = filter_by_keys(self.logger.logs, keys = list(self.logger.logs.keys())[:-1]), 
                 xscale        = self.xscale, 
                 yscale        = self.yscale,
-                output_path   = self.output_path,
+                output_path   = f'{self.output_path}-epoch_{ctx.epoch}' if self.output_path else None,
                 output_ext    = self.output_ext,                 
                 warmup_epochs = self.warmup_count
             )
