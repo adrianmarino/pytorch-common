@@ -8,7 +8,7 @@ class PersistentMixin:
         Args:
             path (str): Path of file.pt (Don't include .pt extension)
         """
-        if not path.path('.pt'): path = f'{path}.pt'
+        if not path.endswith('.pt'): path = f'{path}.pt'
 
         checkpoint = self.state_dict()        
         torch.save(checkpoint, path)
@@ -21,7 +21,7 @@ class PersistentMixin:
             path (str): Path of file.pt (Don't include .pt extension)
         """
 
-        if not path.path('.pt'): path = f'{path}.pt'
+        if not path.endswith('.pt'): path = f'{path}.pt'
 
         checkpoint = torch.load(path)
         self.load_state_dict(checkpoint)
