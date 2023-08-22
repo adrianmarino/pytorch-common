@@ -55,7 +55,7 @@ Publishing pytorch-common (0.2.3) to PyPI
   * **MetricsPlotter**:
     * Plot evaluation metrics.
     * This graph is updated every n epochs during training process.
-    * Allow save plot into a file.
+    * Allow save each plot into a file.
   * **Callback** and **OutputCallback**:
     * Base classes.
   * **CallbackManager**:
@@ -75,9 +75,9 @@ Publishing pytorch-common (0.2.3) to PyPI
   * model
   * LoggerBuilder
   * Dict Utils
-  * `WeightsFileResolver`
+  * `WeightsFileResolver`: Resolver best model weights file path using a given metric like `min` `eva_loss`, `max` `eval_acc`, etc...
 * **Plot**
-  *  plot promotives like `plot_loss`.
+  *  Plot primitives like `plot_loss`.
 
 ## Examples
 
