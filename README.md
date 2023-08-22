@@ -64,16 +64,24 @@ Publishing pytorch-common (0.2.3) to PyPI
   * Support parallel fold processing on CPU.
 * **Mixins**
   * `FiMixin`
+    * `fit(data_loader, loss_fn, epochs, optimizer, callbacks, verbose, extra_ctx, train_fn)` 
   * `CommonMixin`
+    * `params()`: Get model params.
+    * Get associated `device`.
   * `PredictMixin`
+    * `evaluate(data_loader)`
+    * `evaluate_score(data_loader, score_fn)`
+    * `predict(features)`
   * `PersistentMixin`
+    * `save(path)`
+    * `loa(path)`
 * **Utils**
   * device management
-  * stopwatch
+  * `Stopwatch
   * data split
   * os
   * model
-  * LoggerBuilder
+  * `LoggerBuilder`
   * Dict Utils
   * `WeightsFileResolver`: Resolver best model weights file path using a given metric like `min` `eva_loss`, `max` `eval_acc`, etc...
 * **Plot**
