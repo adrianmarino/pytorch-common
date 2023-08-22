@@ -77,7 +77,7 @@ Publishing pytorch-common (0.2.3) to PyPI
     * `loa(path)`
 * **Utils**
   * device management
-  * `Stopwatch
+  * `Stopwatch`
   * data split
   * os
   * model
