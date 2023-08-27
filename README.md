@@ -74,7 +74,7 @@ Publishing pytorch-common (0.2.3) to PyPI
     * `predict(features)`
   * `PersistentMixin`
     * `save(path)`
-    * `loa(path)`
+    * `load(path)`
 * **Utils**
   * device management
   * `Stopwatch`
