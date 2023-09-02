@@ -5,6 +5,7 @@ from pytorch_common.callbacks.output.plot.metric_logger import MetricLogger
 from pytorch_common.plot import plot_loss
 from pytorch_common.util import filter_by_keys
 from datetime import datetime
+import matplotlib.pyplot as plt
 
 
 class MetricsPlotter(OutputCallback):
