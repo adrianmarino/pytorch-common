@@ -41,10 +41,11 @@ class MetricsPlotter(OutputCallback):
 
     def on_show(self, ctx):
         if not self.logger.is_empty():
-            clear_output(wait=True)
-
             if self.disable_plot:
                 plt.ioff()
+                plt.clf()
+            else:
+                clear_output(wait=True)
 
             plot_loss(
                 losses        = filter_by_keys(self.logger.logs, keys = list(self.logger.logs.keys())[:-1]), 
