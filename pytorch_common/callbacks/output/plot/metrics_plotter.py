@@ -18,7 +18,8 @@ class MetricsPlotter(OutputCallback):
             yscale             = 'log',
             output_path        = None,
             output_ext         = 'svg',
-            time_pattern       = '%Y-%m-%d_%H-%M-%S'
+            time_pattern       = '%Y-%m-%d_%H-%M-%S',
+            disable_plot       = False
     ):
         super().__init__(plot_each_n_epochs)
         self.logger = MetricLogger()
@@ -30,6 +31,7 @@ class MetricsPlotter(OutputCallback):
         self.output_path       = output_path
         self.output_ext        = output_ext
         self.time_pattern      = time_pattern
+        self.disable_plot      = disable_plot
         
     def on_after_train(self, ctx):
         super().on_after_train(ctx)
@@ -39,6 +41,10 @@ class MetricsPlotter(OutputCallback):
     def on_show(self, ctx):
         if not self.logger.is_empty():
             clear_output(wait=True)
+
+            if self.disable_plot:
+                plt.ioff()
+
             plot_loss(
                 losses        = filter_by_keys(self.logger.logs, keys = list(self.logger.logs.keys())[:-1]), 
                 xscale        = self.xscale, 
