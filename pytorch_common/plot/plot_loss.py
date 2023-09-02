@@ -37,4 +37,4 @@ def plot_loss(
         plt.tight_layout()
         if output_path:
             plt.savefig(f'{output_path}.{output_ext}', format=output_ext)
-        plt.show()
+        plt.show(block=False)
